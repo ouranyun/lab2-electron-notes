@@ -1,0 +1,16 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "A simple todo application with history feature",
+  "main": "main.js",
+  "scripts": {
+    "start": "node_modules\\electron\\electron.exe .",
+    "package": "electron-packager . TodoApp --platform=win32 --arch=x64 --out=dist --overwrite",
+    "install-electron": "powershell -Command \"Write-Host '=== 开始安装Electron ==='; Write-Host '1. 确保Electron目录存在...'; New-Item -ItemType Directory -Force -Path '.\\node_modules\\electron'; Write-Host '2. 检查已下载的安装包...'; $sourcePath = 'F:\\software\\AI\\electron-v28.1.0-win32-x64.zip'; if (Test-Path $sourcePath) { Write-Host ('   找到安装包: ' + $sourcePath); Write-Host '3. 复制安装包到项目目录...'; Copy-Item -Path $sourcePath -Destination 'electron.zip' -Force; Write-Host '4. 解压文件到临时目录...'; New-Item -ItemType Directory -Force -Path '.\\temp-electron'; Expand-Archive -Path 'electron.zip' -DestinationPath '.\\temp-electron' -Force; Write-Host '5. 检查解压后的文件结构...'; if (Test-Path '.\\temp-electron\\electron.exe') { Write-Host '   找到electron.exe，继续安装...'; Write-Host '6. 复制所有文件到Electron目录...'; Copy-Item -Path '.\\temp-electron\\*' -Destination '.\\node_modules\\electron' -Recurse -Force; Write-Host '7. 创建正确的cli.js文件...'; Set-Content -Path '.\\node_modules\\electron\\cli.js' -Value 'const { spawn } = require(`child_process`); const path = require(`path`); const electron = path.join(__dirname, `electron.exe`); const args = process.argv.slice(2); spawn(electron, args, { stdio: `inherit` });'; Write-Host '8. 清理安装文件...'; Remove-Item -Path 'electron.zip' -Force; Remove-Item -Path '.\\temp-electron' -Recurse -Force; Write-Host '=== Electron安装成功 ===' } else { Write-Error '解压后的文件结构不符合预期，未找到electron.exe'; exit 1 } } else { Write-Error ('未找到已下载的Electron安装包，请检查路径是否正确: ' + $sourcePath); exit 1 }\""
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron-packager": "^17.1.2"
+  }
+}

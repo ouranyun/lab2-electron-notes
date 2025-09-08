@@ -1,0 +1,320 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --text-color: #333;
+    --background-color: #f5f5f5;
+    --task-bg: #fff;
+    --border-color: #e0e0e0;
+    --completed-color: #888;
+    --hover-color: #f9f9f9;
+    --delete-color: #e74c3c;
+    --filter-active: #3498db;
+    --filter-inactive: #7f8c8d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.date {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+main {
+    padding: 20px;
+}
+
+.task-input-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#taskInput {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px 0 0 4px;
+    font-size: 1rem;
+}
+
+#addTaskBtn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+#addTaskBtn:hover {
+    background-color: var(--secondary-color);
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.filter-btn {
+    background: none;
+    border: none;
+    color: var(--filter-inactive);
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.filter-btn.active {
+    color: var(--filter-active);
+    font-weight: bold;
+}
+
+.task-list {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--task-bg);
+    transition: background-color 0.3s;
+}
+
+.task-item:hover {
+    background-color: var(--hover-color);
+}
+
+.task-item input[type="checkbox"] {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.task-text {
+    flex: 1;
+}
+
+.task-completed .task-text {
+    text-decoration: line-through;
+    color: var(--completed-color);
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: var(--delete-color);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.task-item:hover .delete-btn {
+    opacity: 1;
+}
+
+.task-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--completed-color);
+    font-size: 0.9rem;
+}
+
+#clearCompletedBtn {
+    background: none;
+    border: none;
+    color: var(--filter-inactive);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+#clearCompletedBtn:hover {
+    color: var(--delete-color);
+}
+
+@media (max-width: 500px) {
+    .container {
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    body {
+        padding: 0;
+    }
+}
+
+/* 历史记录按钮样式 */
+#historyBtn {
+    background: none;
+    border: none;
+    color: var(--filter-inactive);
+    cursor: pointer;
+    transition: color 0.3s;
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+#historyBtn:hover {
+    color: var(--primary-color);
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: modalFadeIn 0.4s;
+}
+
+@keyframes modalFadeIn {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.modal-header h2 {
+    color: var(--primary-color);
+}
+
+.close-btn {
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close-btn:hover {
+    color: var(--text-color);
+}
+
+.modal-body {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.history-list {
+    list-style: none;
+}
+
+.history-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-item .history-text {
+    flex: 1;
+    color: var(--completed-color);
+}
+
+.history-item .history-date {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 10px;
+}
+
+/* 动画效果 */
+.task-item {
+    transition: all 0.3s ease;
+}
+
+.task-item.task-completed {
+    transform: translateX(10px);
+    opacity: 0.7;
+}
+
+.task-item.task-enter {
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
+.task-item.task-enter-active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.task-item.task-exit {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.task-item.task-exit-active {
+    transform: translateY(-20px);
+    opacity: 0;
+}

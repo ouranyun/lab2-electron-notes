@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>现代待办事项应用</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>我的待办事项</h1>
+            <div class="date"></div>
+        </header>
+
+        <main>
+            <div class="task-input-container">
+                <input type="text" id="taskInput" placeholder="添加新任务...">
+                <button id="addTaskBtn"><i class="fas fa-plus"></i></button>
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="active">进行中</button>
+                <button class="filter-btn" data-filter="completed">已完成</button>
+            </div>
+
+            <ul id="taskList" class="task-list"></ul>
+
+            <div class="task-summary">
+                <span id="taskCount">0 个任务</span>
+                <button id="historyBtn">历史记录</button>
+                <button id="clearCompletedBtn">清除已完成</button>
+            </div>
+
+            <!-- 历史记录模态框 -->
+            <div id="historyModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>已删除任务</h2>
+                        <span class="close-btn">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <ul id="historyList" class="history-list"></ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="clearHistoryBtn">清空历史</button>
+                        <button id="closeHistoryBtn">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
